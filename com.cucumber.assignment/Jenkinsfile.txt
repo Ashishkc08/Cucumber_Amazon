@@ -1,6 +1,10 @@
 pipeline {
     agent any
-    
+
+    tools{
+        maven 'MAVEN'
+    }
+
     stages {
         stage('Navigate to Directory') {
             steps {
@@ -36,5 +40,4 @@ pipeline {
             }
         }
     }
-    
 }
