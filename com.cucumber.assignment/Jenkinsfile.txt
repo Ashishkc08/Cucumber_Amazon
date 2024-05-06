@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Navigate to Directory') {
+            steps {
+                echo 'Navigating to the project directory'
+                git branch: 'main', changelog: false, url: 'https://github.com/Ashishkc08/Cucumber_Amazon.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                echo 'Building the project'
+                dir('com.cucumber.assignment') {
+                    bat 'mvn clean'
+                }
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo 'Running tests'
+                dir('com.cucumber.assignment') {
+                    bat 'mvn test'
+                }
+            }
+        }
+        
+        stage('Clean Up') {
+            steps {
+                echo 'Cleaning up'
+                dir('com.cucumber.assignment') {
+                    bat 'mvn clean'
+                }
+            }
+        }
+    }
+    
+}
